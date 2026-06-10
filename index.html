@@ -24,25 +24,25 @@
     }
 
     :root {
-      /* NEW COLOR PALETTE */
-      --bg: #080B12;
-      /* Background */
-      --bg2: #121826;
-      /* Secondary Dark */
-      --accent: #00C2FF;
-      /* Electric Blue */
-      --accent-light: #B8C2CC;
-      /* Metallic Silver */
-      --accent-dark: #6E7781;
-      /* Titanium Gray */
-      --text: #FFFFFF;
-      /* White */
-      --text-dim: #B8C2CC;
-      /* Metallic Silver used for dimmed text */
+      /* BRIGHT MODERN PALETTE */
+      --bg: #F8FAFC;
+      /* Light Silver-Blue */
+      --bg2: #FFFFFF;
+      /* Pure White */
+      --accent: #02a9c7;
+      /* Ocean/Electric Blue */
+      --accent-light: #38BDF8;
+      /* Sky Blue */
+      --accent-dark: #0369A1;
+      /* Deep Blue */
+      --text: #0F172A;
+      /* Very Dark Slate (Near Black) */
+      --text-dim: #475569;
+      /* Muted Slate Gray */
 
-      --glass: rgba(184, 194, 204, 0.05);
-      /* Tinted with Metallic Silver */
-      --glass-border: rgba(184, 194, 204, 0.1);
+      --glass: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(15, 23, 42, 0.08);
+      /* Subtle dark border for light theme */
     }
 
     html {
@@ -72,6 +72,13 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .text-outline {
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      -webkit-text-stroke: 2px var(--text);
     }
 
     .btn-accent,
@@ -124,7 +131,7 @@
     .loader-ring {
       width: 60px;
       height: 60px;
-      border: 2px solid rgba(0, 194, 255, 0.1);
+      border: 2px solid rgba(2, 132, 199, 0.1);
       border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
@@ -135,7 +142,7 @@
       content: '';
       position: absolute;
       inset: -6px;
-      border: 1px solid rgba(0, 194, 255, 0.05);
+      border: 1px solid rgba(2, 132, 199, 0.05);
       border-bottom-color: var(--accent-light);
       border-radius: 50%;
       animation: spin 1.2s linear infinite reverse;
@@ -153,7 +160,18 @@
       letter-spacing: 6px;
       text-transform: uppercase;
       color: var(--text-dim);
-      font-weight: 500;
+      font-weight: 600;
+    }
+
+    /* === PARTICLES CANVAS (WHOLE PAGE) === */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      pointer-events: none;
     }
 
     /* === FLOATING NAVBAR === */
@@ -164,20 +182,20 @@
       transform: translateX(-50%);
       width: 95%;
       max-width: 1300px;
-      background: rgba(8, 11, 18, 0.7);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(184, 194, 204, 0.15);
+      border: 1px solid var(--glass-border);
       border-radius: 50px;
       padding: 12px 30px;
       z-index: 1000;
       transition: all 0.4s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     }
 
     .navbar-floating.scrolled {
-      background: rgba(8, 11, 18, 0.95);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     }
 
     .navbar-brand {
@@ -193,7 +211,7 @@
     .nav-link {
       color: var(--text-dim) !important;
       font-size: 0.8rem;
-      font-weight: 500;
+      font-weight: 600;
       padding: 8px 16px !important;
       transition: all 0.3s;
       position: relative;
@@ -221,8 +239,8 @@
     }
 
     .nav-cta {
-      background: rgba(0, 194, 255, 0.1) !important;
-      border: 1px solid rgba(0, 194, 255, 0.2) !important;
+      background: rgba(2, 132, 199, 0.1) !important;
+      border: 1px solid rgba(2, 132, 199, 0.2) !important;
       color: var(--accent) !important;
       border-radius: 30px;
       padding: 8px 26px !important;
@@ -234,7 +252,7 @@
 
     .nav-cta:hover {
       background: var(--accent) !important;
-      color: #080B12 !important;
+      color: #FFFFFF !important;
     }
 
     /* === STAGES / SECTIONS === */
@@ -248,59 +266,66 @@
     .section-sub {
       font-size: 1.15rem;
       color: var(--text-dim);
-      font-weight: 300;
+      font-weight: 400;
       max-width: 650px;
       margin: 0 auto;
       line-height: 1.6;
     }
 
     /* ========================================
-       HERO (Metallic BG + Particles over it)
+       HERO (With Bright Opacity Frame)
     ======================================== */
     .hero-section {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background-color: var(--bg);
+      background: linear-gradient(-45deg, #F8FAFC, #FFFFFF, #E2E8F0, #F1F5F9);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       padding-top: 80px;
       position: relative;
     }
 
-    /* The Metallic Image Background */
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+
+    /* The Image Background Inside the Frame (Less Opacity) */
     .hero-bg-image {
       position: absolute;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1533331818223-953e5eaf8fc9?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
-      opacity: 0.15;
-      /* Low opacity so it acts as a subtle texture */
+      background: url('home.jpeg') center/cover no-repeat;
+      opacity: 0.08;
+      /* Acts as a very subtle clean texture */
       z-index: 0;
-    }
-
-    /* Particles layered OVER the metallic image, UNDER the text */
-    #particles-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
     }
 
     .hero-section .grid-bg {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(184, 194, 204, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(184, 194, 204, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
       background-size: 80px 80px;
-      z-index: 2;
+      z-index: 1;
     }
 
     .hero-content {
       position: relative;
-      z-index: 3;
-      /* Text stays on top of particles and image */
+      z-index: 2;
+      /* Keeps text above the frame */
+      width: 100%;
     }
 
     .hero-title {
@@ -324,12 +349,12 @@
       max-width: 650px;
       line-height: 1.8;
       margin-bottom: 2.5rem;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .btn-accent {
       background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: #080B12 !important;
+      color: #FFFFFF !important;
       border: none;
       padding: 16px 42px;
       border-radius: 50px;
@@ -344,13 +369,13 @@
 
     .btn-accent:hover {
       transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(0, 194, 255, 0.3);
+      box-shadow: 0 15px 30px rgba(2, 132, 199, 0.3);
       background: linear-gradient(135deg, var(--accent-light), var(--accent));
     }
 
     .btn-outline {
       background: transparent;
-      border: 1.5px solid rgba(184, 194, 204, 0.2);
+      border: 1.5px solid rgba(15, 23, 42, 0.2);
       color: var(--text);
       padding: 16px 42px;
       border-radius: 50px;
@@ -362,7 +387,7 @@
 
     .btn-outline:hover {
       border-color: var(--accent);
-      background: rgba(0, 194, 255, 0.05);
+      background: rgba(2, 132, 199, 0.05);
       color: var(--accent);
       transform: translateY(-3px);
     }
@@ -378,11 +403,12 @@
     }
 
     .about-badge-sub {
-      color: var(--accent-light);
+      color: var(--accent);
       font-size: 0.85rem;
       text-transform: uppercase;
       font-family: 'Poppins', sans-serif;
       letter-spacing: 2px;
+      font-weight: 600;
     }
 
     .about-highlight-box {
@@ -407,12 +433,14 @@
       cursor: pointer;
       transition: transform 0.4s ease;
       border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     }
 
     .project-card:hover {
       transform: translateY(-10px);
       z-index: 10;
-      border-color: rgba(0, 194, 255, 0.4);
+      border-color: rgba(2, 132, 199, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     }
 
     .project-card img {
@@ -426,10 +454,11 @@
       transform: scale(1.08);
     }
 
+    /* Frosted glass overlay for project cards */
     .project-card .overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 30%, rgba(8, 11, 18, 0.95) 100%);
+      background: linear-gradient(180deg, transparent 30%, rgba(255, 255, 255, 0.95) 100%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -440,11 +469,13 @@
       font-size: 0.65rem;
       color: var(--accent);
       margin-bottom: 8px;
+      font-weight: 600;
     }
 
     .project-card .name {
       font-size: 1.5rem;
       text-transform: capitalize;
+      color: var(--text);
     }
 
     .project-card .view-btn {
@@ -460,32 +491,34 @@
       opacity: 0;
       transform: translateY(10px);
       transition: all 0.4s 0.1s;
-      border-bottom: 1px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
     }
 
     .project-card:hover .view-btn {
       opacity: 1;
       transform: translateY(0);
-      color: var(--accent-light);
+      color: var(--accent);
     }
 
     /* ========================================
        INDUSTRIES SERVED
     ======================================== */
     .industry-card {
-      background: var(--glass);
+      background: var(--bg2);
       border: 1px solid var(--glass-border);
       border-radius: 24px;
       padding: 40px 30px;
       text-align: center;
       transition: all 0.4s;
       height: 100%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
     }
 
     .industry-card:hover {
-      background: rgba(0, 194, 255, 0.05);
+      background: rgba(2, 132, 199, 0.02);
       border-color: var(--accent);
       transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
     }
 
     .industry-card i {
@@ -500,6 +533,7 @@
       font-size: 1.3rem;
       margin-bottom: 10px;
       text-transform: capitalize;
+      color: var(--text);
     }
 
     .industry-card p {
@@ -507,7 +541,7 @@
       color: var(--text-dim);
       margin: 0;
       line-height: 1.6;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     /* ========================================
@@ -522,24 +556,24 @@
     .glass-card-premium {
       padding: 40px 30px;
       border-radius: 24px;
-      background: var(--glass);
-      backdrop-filter: blur(20px);
+      background: var(--bg2);
       border: 1px solid var(--glass-border);
       transition: all 0.4s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
     }
 
     .glass-card-premium:hover {
-      border-color: rgba(0, 194, 255, 0.3);
+      border-color: rgba(2, 132, 199, 0.3);
       transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
     }
 
     .glass-card-premium .icon {
       width: 55px;
       height: 55px;
       border-radius: 16px;
-      background: rgba(0, 194, 255, 0.1);
-      border: 1px solid rgba(0, 194, 255, 0.2);
+      background: rgba(2, 132, 199, 0.1);
+      border: 1px solid rgba(2, 132, 199, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -553,6 +587,7 @@
       font-size: 1.3rem;
       margin-bottom: 12px;
       text-transform: capitalize;
+      color: var(--text);
     }
 
     .glass-card-premium p {
@@ -560,7 +595,7 @@
       color: var(--text-dim);
       line-height: 1.7;
       margin: 0;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     /* ========================================
@@ -585,7 +620,7 @@
       font-size: 0.9rem;
       color: var(--text-dim);
       margin-top: 10px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .impact-suffix {
@@ -608,7 +643,7 @@
       transform: translateY(-50%);
       width: 1px;
       height: 50%;
-      background: linear-gradient(180deg, transparent, rgba(0, 194, 255, 0.2), transparent);
+      background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.1), transparent);
     }
 
     .impact-item:last-child::after {
@@ -634,7 +669,6 @@
       display: flex;
       gap: 24px;
       padding-left: 24px;
-      /* Animation duration slowed down for readability */
       animation: marqueeL2R 90s linear infinite;
     }
 
@@ -654,11 +688,12 @@
 
     .feedback-card {
       width: 400px;
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--bg2);
       border: 1px solid var(--glass-border);
       padding: 40px 35px;
       border-radius: 24px;
       flex-shrink: 0;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
     }
 
     .feedback-stars {
@@ -669,18 +704,18 @@
 
     .feedback-text {
       font-size: 1.05rem;
-      color: var(--text);
+      color: var(--text-dim);
       font-style: italic;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
       margin-bottom: 20px;
     }
 
     .feedback-author {
       font-family: 'Poppins', sans-serif;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.85rem;
-      color: var(--accent-light);
+      color: var(--text);
       text-transform: uppercase;
     }
 
@@ -695,48 +730,49 @@
     .contact-form-panel {
       padding: 50px;
       border-radius: 24px;
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--bg2);
       border: 1px solid var(--glass-border);
       height: 100%;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
     }
 
     .contact-form-panel .form-control {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(184, 194, 204, 0.15);
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(15, 23, 42, 0.1);
       border-radius: 12px;
       padding: 16px 20px;
-      color: #ffffff !important;
+      color: var(--text) !important;
       font-size: 0.95rem;
       transition: all 0.3s;
     }
 
     .contact-form-panel .form-control:focus {
-      background: rgba(255, 255, 255, 0.08);
+      background: #FFFFFF;
       border-color: var(--accent);
-      box-shadow: none;
+      box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
       outline: none;
     }
 
     .contact-form-panel .form-control::placeholder {
-      color: rgba(184, 194, 204, 0.4);
+      color: rgba(15, 23, 42, 0.4);
     }
 
     .contact-form-panel select.form-control option {
-      background-color: #121826;
-      color: #fff;
+      background-color: #FFFFFF;
+      color: var(--text);
       padding: 10px;
     }
 
     .contact-form-panel .form-label {
       font-size: 0.8rem;
-      color: var(--accent-light);
-      font-weight: 500;
+      color: var(--accent);
+      font-weight: 600;
       margin-bottom: 8px;
     }
 
     .btn-submit {
       background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: #080B12 !important;
+      color: #FFFFFF !important;
       border: none;
       padding: 18px;
       border-radius: 12px;
@@ -755,7 +791,7 @@
 
     .btn-submit:hover {
       transform: translateY(-4px);
-      box-shadow: 0 15px 30px rgba(0, 194, 255, 0.3);
+      box-shadow: 0 15px 30px rgba(2, 132, 199, 0.3);
       background: linear-gradient(135deg, var(--accent-light), var(--accent));
     }
 
@@ -765,12 +801,13 @@
       border-radius: 24px;
       overflow: hidden;
       border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     }
 
     /* === FOOTER === */
     .footer {
       padding: 60px 0 30px;
-      background: #05070a;
+      background: #F1F5F9;
       border-top: 1px solid var(--glass-border);
     }
 
@@ -778,6 +815,7 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 2rem;
       font-weight: 900;
+      color: var(--text);
     }
 
     .footer-logo span {
@@ -788,7 +826,11 @@
       color: var(--text-dim);
       font-size: 0.95rem;
       line-height: 1.7;
-      font-weight: 300;
+      font-weight: 400;
+    }
+
+    .footer h6 {
+      color: var(--text);
     }
 
     .footer a {
@@ -807,28 +849,29 @@
       width: 42px;
       height: 42px;
       border-radius: 12px;
-      border: 1px solid var(--glass-border);
+      border: 1px solid rgba(15, 23, 42, 0.1);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       margin-right: 10px;
       font-size: 1.2rem;
+      color: var(--text-dim);
     }
 
     .footer .social a:hover {
       border-color: var(--accent);
       color: var(--accent);
-      background: rgba(0, 194, 255, 0.05);
+      background: rgba(2, 132, 199, 0.05);
     }
 
     .footer-bottom {
-      color: rgba(184, 194, 204, 0.4);
+      color: var(--text-dim);
       font-size: 0.8rem;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .footer-bottom a {
-      color: rgba(184, 194, 204, 0.4);
+      color: var(--text-dim);
     }
 
     .footer-bottom a:hover {
@@ -879,6 +922,11 @@
         border-radius: 0;
         padding: 10px 20px;
       }
+
+      .hero-opacity-frame {
+        inset: 10px;
+        border-radius: 20px;
+      }
     }
 
     @media (max-width: 767px) {
@@ -917,6 +965,8 @@
 
 <body>
 
+  <canvas id="particles-canvas"></canvas>
+
   <div class="loader" id="loader">
     <div class="loader-ring"></div>
     <div class="loader-text">Forging Excellence</div>
@@ -926,7 +976,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">HEROS<span>.</span></a>
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-        <i class="bi bi-list text-white fs-2"></i>
+        <i class="bi bi-list fs-2" style="color: var(--text);"></i>
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
@@ -942,18 +992,17 @@
   </nav>
 
   <section class="stage hero-section text-center" id="home">
-    <div class="hero-bg-image"></div>
 
-    <canvas id="particles-canvas"></canvas>
-
-    <div class="grid-bg"></div>
+    <div class="hero-opacity-frame">
+      <div class="grid-bg"></div>
+    </div>
 
     <div class="container hero-content">
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <h1 class="hero-title reveal reveal-d1">
             We Shape <span class="accent-text">Metal</span><br />
-            Into <span class="accent-text">Possibilities</span>
+            <span class="text-outline">Into</span> <span class="accent-text">Possibilities</span>
           </h1>
           <p class="hero-sub mx-auto reveal reveal-d2">
             Transforming raw materials into world-class engineering solutions.
@@ -972,9 +1021,10 @@
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-6 reveal reveal-d1">
-          <h2 class="section-title mb-4" style="font-size: clamp(2.2rem, 4vw, 3.2rem);">ABOUT HEROS METALIC SUPPLIES LLC
+          <h2 class="section-title mb-4" style="font-size: clamp(2.2rem, 4vw, 3.2rem);">About Our <span
+              class="text-outline">Firm</span>
           </h2>
-          <p class="text-dim mb-5" style="line-height: 1.8; font-weight: 300; font-size: 1.05rem;">
+          <p class="text-dim mb-5" style="line-height: 1.8; font-size: 1.05rem; color: var(--text-dim);">
             Founded on the principles of unyielding strength and architectural finesse, Heros Metallic Supplies LLC
             stands at the vanguard of the UAE’s industrial sector. With over two decades of experience, we specialize in
             transforming raw steel into monumental structures and bespoke architectural elements. From high-tolerance
@@ -998,7 +1048,7 @@
         </div>
         <div class="col-lg-6 reveal reveal-d2">
           <img src="images/i2.png" alt="Metal Texture" class="img-fluid"
-            style="border-radius: 24px; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+            style="border-radius: 24px; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
         </div>
       </div>
     </div>
@@ -1033,7 +1083,8 @@
   <section class="stage" id="projects">
     <div class="container">
       <div class="text-center mb-5 reveal">
-        <h2 class="section-title">From Metal To <span class="accent-text">Masterpiece</span></h2>
+        <h2 class="section-title">From <span class="text-outline">Metal</span> To <span
+            class="accent-text">Masterpiece</span></h2>
         <p class="section-sub">Explore our portfolio of industrial and architectural fabrication.</p>
       </div>
       <div class="project-grid">
@@ -1092,7 +1143,8 @@
   <section class="stage" id="industries" style="background: var(--bg2);">
     <div class="container">
       <div class="text-center mb-5 reveal">
-        <h2 class="section-title">Industries We <span class="accent-text">Serve</span></h2>
+        <h2 class="section-title"><span class="text-outline">Industries</span> We <span class="accent-text">Serve</span>
+        </h2>
         <p class="section-sub">Delivering robust metal solutions across critical sectors.</p>
       </div>
       <div class="row g-4">
@@ -1132,7 +1184,8 @@
   <section class="stage" id="why-us">
     <div class="container">
       <div class="text-center mb-5 reveal">
-        <h2 class="section-title">Built On <span class="accent-text">Excellence</span></h2>
+        <h2 class="section-title">Built <span class="text-outline">On</span> <span class="accent-text">Excellence</span>
+        </h2>
         <p class="section-sub">What separates Heros Metallic from the rest.</p>
       </div>
       <div class="glass-card-grid">
@@ -1176,7 +1229,8 @@
   <section class="marquee-section" id="feedback">
     <div class="container mb-5">
       <div class="text-center reveal">
-        <h2 class="section-title">Trusted By <span class="accent-text">Leaders</span></h2>
+        <h2 class="section-title"><span class="text-outline">Trusted</span> By <span class="accent-text">Leaders</span>
+        </h2>
         <p class="section-sub">What our industrial partners are saying about our work.</p>
       </div>
     </div>
@@ -1334,7 +1388,8 @@
   <section class="stage stage-contact py-5" id="contact">
     <div class="container">
       <div class="text-center mb-5 reveal">
-        <h2 class="section-title">Start Your <span class="accent-text">Project</span></h2>
+        <h2 class="section-title">Start <span class="text-outline">Your</span> <span class="accent-text">Project</span>
+        </h2>
         <p class="section-sub">Connect with our engineers for a technical quotation.</p>
       </div>
 
@@ -1457,20 +1512,17 @@
         }
       });
 
-      // ===== PARTICLES (Electric Blue Falling Sparks) =====
+      // ===== PARTICLES (Electric Blue Falling Sparks - WHOLE PAGE) =====
       (function () {
         var canvas = document.getElementById('particles-canvas');
         var ctx = canvas.getContext('2d');
         var particles = [];
 
         function resize() {
-          // Bind the canvas size specifically to the hero section instead of window
-          var hero = document.getElementById('home');
-          canvas.width = hero.offsetWidth;
-          canvas.height = hero.offsetHeight;
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
         }
 
-        // Initial setup
         window.addEventListener('load', resize);
         window.addEventListener('resize', resize);
 
@@ -1503,14 +1555,13 @@
 
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            // Updated to Electric Blue
-            ctx.fillStyle = 'rgba(0, 194, 255,' + p.a + ')';
+            // Electric Blue Particles
+            ctx.fillStyle = 'rgba(2, 132, 199,' + p.a + ')';
             ctx.fill();
           }
           requestAnimationFrame(animate);
         }
 
-        // Ensure canvas loads with correct dimensions before starting animation
         setTimeout(animate, 100);
       })();
 
