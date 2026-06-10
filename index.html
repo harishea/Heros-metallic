@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heros Metallic Supplies LLC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* NEW COLOR PALETTE */
+      --bg: #080B12;
+      /* Background */
+      --bg2: #121826;
+      /* Secondary Dark */
+      --accent: #00C2FF;
+      /* Electric Blue */
+      --accent-light: #B8C2CC;
+      /* Metallic Silver */
+      --accent-dark: #6E7781;
+      /* Titanium Gray */
+      --text: #FFFFFF;
+      /* White */
+      --text-dim: #B8C2CC;
+      /* Metallic Silver used for dimmed text */
+
+      --glass: rgba(184, 194, 204, 0.05);
+      /* Tinted with Metallic Silver */
+      --glass-border: rgba(184, 194, 204, 0.1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === TYPOGRAPHY THEME === */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .hero-title,
+    .section-title,
+    .navbar-brand,
+    .impact-num,
+    .project-card .name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .btn-accent,
+    .btn-outline,
+    .btn-submit,
+    .impact-label,
+    .tag,
+    .form-label,
+    .footer h6,
+    .view-btn,
+    .nav-link {
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 10px;
+    }
+
+    /* === LOADER === */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 32px;
+      transition: opacity 0.8s, visibility 0.8s;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-ring {
+      width: 60px;
+      height: 60px;
+      border: 2px solid rgba(0, 194, 255, 0.1);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      position: relative;
+    }
+
+    .loader-ring::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border: 1px solid rgba(0, 194, 255, 0.05);
+      border-bottom-color: var(--accent-light);
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite reverse;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loader-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    /* === FLOATING NAVBAR === */
+    .navbar-floating {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95%;
+      max-width: 1300px;
+      background: rgba(8, 11, 18, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(184, 194, 204, 0.15);
+      border-radius: 50px;
+      padding: 12px 30px;
+      z-index: 1000;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar-floating.scrolled {
+      background: rgba(8, 11, 18, 0.95);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .navbar-brand {
+      font-size: 1.6rem;
+      color: var(--text) !important;
+      text-transform: uppercase;
+    }
+
+    .navbar-brand span {
+      color: var(--accent);
+    }
+
+    .nav-link {
+      color: var(--text-dim) !important;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 8px 16px !important;
+      transition: all 0.3s;
+      position: relative;
+      margin: 0 4px;
+    }
+
+    .nav-link:hover {
+      color: var(--accent) !important;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: calc(100% - 32px);
+    }
+
+    .nav-cta {
+      background: rgba(0, 194, 255, 0.1) !important;
+      border: 1px solid rgba(0, 194, 255, 0.2) !important;
+      color: var(--accent) !important;
+      border-radius: 30px;
+      padding: 8px 26px !important;
+    }
+
+    .nav-cta::after {
+      display: none;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent) !important;
+      color: #080B12 !important;
+    }
+
+    /* === STAGES / SECTIONS === */
+    .stage {
+      position: relative;
+      z-index: 1;
+      padding: 100px 0;
+      overflow: hidden;
+    }
+
+    .section-sub {
+      font-size: 1.15rem;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       HERO (Metallic BG + Particles over it)
+    ======================================== */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background-color: var(--bg);
+      padding-top: 80px;
+      position: relative;
+    }
+
+    /* The Metallic Image Background */
+    .hero-bg-image {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1533331818223-953e5eaf8fc9?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+      opacity: 0.15;
+      /* Low opacity so it acts as a subtle texture */
+      z-index: 0;
+    }
+
+    /* Particles layered OVER the metallic image, UNDER the text */
+    #particles-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-section .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(184, 194, 204, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184, 194, 204, 0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      /* Text stays on top of particles and image */
+    }
+
+    .hero-title {
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      margin-top: 80px;
+      text-transform: capitalize;
+    }
+
+    .hero-title .accent-text {
+      background: linear-gradient(135deg, var(--accent-light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: var(--text-dim);
+      max-width: 650px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #080B12 !important;
+      border: none;
+      padding: 16px 42px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.4s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .btn-accent:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0, 194, 255, 0.3);
+      background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(184, 194, 204, 0.2);
+      color: var(--text);
+      padding: 16px 42px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.4s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: rgba(0, 194, 255, 0.05);
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* ========================================
+       ABOUT
+    ======================================== */
+    .about-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    .about-badge-sub {
+      color: var(--accent-light);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .about-highlight-box {
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+    }
+
+    /* ========================================
+       PROJECT SHOWCASE
+    ======================================== */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      height: 380px;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      border: 1px solid var(--glass-border);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      z-index: 10;
+      border-color: rgba(0, 194, 255, 0.4);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .project-card .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(8, 11, 18, 0.95) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px;
+    }
+
+    .project-card .tag {
+      font-size: 0.65rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .project-card .name {
+      font-size: 1.5rem;
+      text-transform: capitalize;
+    }
+
+    .project-card .view-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding-bottom: 3px;
+      width: fit-content;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s 0.1s;
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .project-card:hover .view-btn {
+      opacity: 1;
+      transform: translateY(0);
+      color: var(--accent-light);
+    }
+
+    /* ========================================
+       INDUSTRIES SERVED
+    ======================================== */
+    .industry-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.4s;
+      height: 100%;
+    }
+
+    .industry-card:hover {
+      background: rgba(0, 194, 255, 0.05);
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .industry-card i {
+      font-size: 2.8rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .industry-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      text-transform: capitalize;
+    }
+
+    .industry-card p {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      margin: 0;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ========================================
+       WHY CHOOSE US
+    ======================================== */
+    .glass-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .glass-card-premium {
+      padding: 40px 30px;
+      border-radius: 24px;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      transition: all 0.4s;
+    }
+
+    .glass-card-premium:hover {
+      border-color: rgba(0, 194, 255, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .glass-card-premium .icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 16px;
+      background: rgba(0, 194, 255, 0.1);
+      border: 1px solid rgba(0, 194, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .glass-card-premium h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      text-transform: capitalize;
+    }
+
+    .glass-card-premium p {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin: 0;
+      font-weight: 300;
+    }
+
+    /* ========================================
+       IMPACT COUNTERS
+    ======================================== */
+    .stage-impact {
+      background: var(--bg2);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .impact-num {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent-light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .impact-label {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .impact-suffix {
+      font-size: 0.5em;
+      vertical-align: super;
+      -webkit-text-fill-color: var(--accent);
+    }
+
+    .impact-item {
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .impact-item::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 50%;
+      background: linear-gradient(180deg, transparent, rgba(0, 194, 255, 0.2), transparent);
+    }
+
+    .impact-item:last-child::after {
+      display: none;
+    }
+
+    /* ========================================
+       FEEDBACK MARQUEE (Left to Right)
+    ======================================== */
+    .marquee-section {
+      padding: 100px 0;
+      background: var(--bg);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marquee-container {
+      display: flex;
+      width: max-content;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 24px;
+      padding-left: 24px;
+      /* Animation duration slowed down for readability */
+      animation: marqueeL2R 90s linear infinite;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes marqueeL2R {
+      0% {
+        transform: translateX(-50%);
+      }
+
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    .feedback-card {
+      width: 400px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      padding: 40px 35px;
+      border-radius: 24px;
+      flex-shrink: 0;
+    }
+
+    .feedback-stars {
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .feedback-text {
+      font-size: 1.05rem;
+      color: var(--text);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .feedback-author {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--accent-light);
+      text-transform: uppercase;
+    }
+
+    /* ========================================
+       CONTACT
+    ======================================== */
+    .stage-contact {
+      background: var(--bg2);
+      padding-bottom: 0;
+    }
+
+    .contact-form-panel {
+      padding: 50px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      height: 100%;
+    }
+
+    .contact-form-panel .form-control {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(184, 194, 204, 0.15);
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #ffffff !important;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+
+    .contact-form-panel .form-control:focus {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent);
+      box-shadow: none;
+      outline: none;
+    }
+
+    .contact-form-panel .form-control::placeholder {
+      color: rgba(184, 194, 204, 0.4);
+    }
+
+    .contact-form-panel select.form-control option {
+      background-color: #121826;
+      color: #fff;
+      padding: 10px;
+    }
+
+    .contact-form-panel .form-label {
+      font-size: 0.8rem;
+      color: var(--accent-light);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #080B12 !important;
+      border: none;
+      padding: 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      width: 100%;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0, 194, 255, 0.3);
+      background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    }
+
+    .map-container {
+      height: 100%;
+      min-height: 450px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+    }
+
+    /* === FOOTER === */
+    .footer {
+      padding: 60px 0 30px;
+      background: #05070a;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .footer-logo span {
+      color: var(--accent);
+    }
+
+    .footer p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+
+    .footer a:hover {
+      color: var(--accent);
+    }
+
+    .footer .social a {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .footer .social a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0, 194, 255, 0.05);
+    }
+
+    .footer-bottom {
+      color: rgba(184, 194, 204, 0.4);
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+
+    .footer-bottom a {
+      color: rgba(184, 194, 204, 0.4);
+    }
+
+    .footer-bottom a:hover {
+      color: var(--accent);
+    }
+
+    /* === REVEAL === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-d1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-d2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-d3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-d4 {
+      transition-delay: 0.4s;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 991px) {
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .glass-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .navbar-floating {
+        width: 100%;
+        top: 0;
+        border-radius: 0;
+        padding: 10px 20px;
+      }
+    }
+
+    @media (max-width: 767px) {
+
+      .project-grid,
+      .glass-card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-item::after {
+        display: none;
+      }
+
+      .contact-form-panel {
+        padding: 30px 20px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 10vw, 3.5rem);
+      }
+
+      .stage {
+        padding: 60px 0;
+      }
+
+      .map-container {
+        min-height: 350px;
+      }
+
+      .marquee-section {
+        padding: 60px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="loader" id="loader">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Forging Excellence</div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-floating" id="mainNav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">HEROS<span>.</span></a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <i class="bi bi-list text-white fs-2"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#industries">Industries</a></li>
+          <li class="nav-item"><a class="nav-link" href="#why-us">Why Us</a></li>
+          <li class="nav-item ms-lg-3"><a class="nav-link nav-cta" href="#contact">Get Quote</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="stage hero-section text-center" id="home">
+    <div class="hero-bg-image"></div>
+
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="grid-bg"></div>
+
+    <div class="container hero-content">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <h1 class="hero-title reveal reveal-d1">
+            We Shape <span class="accent-text">Metal</span><br />
+            Into <span class="accent-text">Possibilities</span>
+          </h1>
+          <p class="hero-sub mx-auto reveal reveal-d2">
+            Transforming raw materials into world-class engineering solutions.
+            Every project is a journey from raw element to architectural masterpiece.
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap reveal reveal-d3">
+            <a href="#projects" class="btn-accent"><span>Explore Our Work</span> <i class="bi bi-arrow-right"></i></a>
+            <a href="#contact" class="btn-outline">Contact Engineers</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" id="about">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal reveal-d1">
+          <h2 class="section-title mb-4" style="font-size: clamp(2.2rem, 4vw, 3.2rem);">ABOUT HEROS METALIC SUPPLIES LLC
+          </h2>
+          <p class="text-dim mb-5" style="line-height: 1.8; font-weight: 300; font-size: 1.05rem;">
+            Founded on the principles of unyielding strength and architectural finesse, Heros Metallic Supplies LLC
+            stands at the vanguard of the UAE’s industrial sector. With over two decades of experience, we specialize in
+            transforming raw steel into monumental structures and bespoke architectural elements. From high-tolerance
+            CNC machining to heavy-duty commercial frameworks, our commitment to safety, innovation, and absolute
+            precision drives every project we undertake.
+          </p>
+          <div class="row g-4 mt-2">
+            <div class="col-sm-6">
+              <div class="about-highlight-box">
+                <h5 class="about-badge mb-1">PRECISION</h5>
+                <span class="about-badge-sub">Engineered</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="about-highlight-box">
+                <h5 class="about-badge mb-1">DURABILITY</h5>
+                <span class="about-badge-sub">Guaranteed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal reveal-d2">
+          <img src="images/i2.png" alt="Metal Texture" class="img-fluid"
+            style="border-radius: 24px; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage stage-impact py-5">
+    <div class="container">
+      <div class="row g-0 justify-content-center">
+        <div class="col-6 col-md-3 impact-item reveal reveal-d1">
+          <div class="impact-num"><span class="counter" data-target="25">0</span><span class="impact-suffix">+</span>
+          </div>
+          <div class="impact-label">Years of Experience</div>
+        </div>
+        <div class="col-6 col-md-3 impact-item reveal reveal-d2">
+          <div class="impact-num"><span class="counter" data-target="47">0</span><span class="impact-suffix">+</span>
+          </div>
+          <div class="impact-label">Projects Completed</div>
+        </div>
+        <div class="col-6 col-md-3 impact-item reveal reveal-d3">
+          <div class="impact-num"><span class="counter" data-target="100">0</span><span class="impact-suffix">+</span>
+          </div>
+          <div class="impact-label">Happy Clients</div>
+        </div>
+        <div class="col-6 col-md-3 impact-item reveal reveal-d4">
+          <div class="impact-num"><span class="counter" data-target="11">0</span></div>
+          <div class="impact-label">Service Categories</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" id="projects">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">From Metal To <span class="accent-text">Masterpiece</span></h2>
+        <p class="section-sub">Explore our portfolio of industrial and architectural fabrication.</p>
+      </div>
+      <div class="project-grid">
+        <div class="project-card reveal reveal-d1">
+          <img src="images/s.webp" alt="Bridge" loading="lazy" />
+          <div class="overlay">
+            <span class="tag">Structural Steel</span>
+            <div class="name">Structural Fabrication</div>
+            <a href="#" class="view-btn">View Project <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="project-card reveal reveal-d2">
+          <img src="images/s2.webp" alt="Warehouse" loading="lazy" />
+          <div class="overlay">
+            <span class="tag">Logistics</span>
+            <div class="name">Handrail Works</div>
+            <a href="#" class="view-btn">View Project <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="project-card reveal reveal-d3">
+          <img src="images/s3.webp" alt="Tower" loading="lazy" />
+          <div class="overlay">
+            <span class="tag">Commercial</span>
+            <div class="name">Heros Metallic Supplies</div>
+            <a href="#" class="view-btn">View Project <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="project-card reveal reveal-d1">
+          <img src="images/s4.webp" alt="Atrium" loading="lazy" />
+          <div class="overlay">
+            <span class="tag">Architectural</span>
+            <div class="name">Interior Decorators</div>
+            <a href="#" class="view-btn">View Project <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="project-card reveal reveal-d2">
+          <img src="images/s5.webp" alt="Pipeline" loading="lazy" />
+          <div class="overlay">
+            <span class="tag">Oil & Gas</span>
+            <div class="name">Interior Decorators Pergola Works</div>
+            <a href="#" class="view-btn">View Project <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="project-card reveal reveal-d3">
+          <img src="images/s6.webp" alt="Stadium" loading="lazy" />
+          <div class="overlay">
+            <span class="tag">Sports</span>
+            <div class="name">Metal Fabrication</div>
+            <a href="#" class="view-btn">View Project <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" id="industries" style="background: var(--bg2);">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">Industries We <span class="accent-text">Serve</span></h2>
+        <p class="section-sub">Delivering robust metal solutions across critical sectors.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6 reveal reveal-d1">
+          <div class="industry-card">
+            <i class="bi bi-fuel-pump-fill"></i>
+            <h4>Oil & Gas</h4>
+            <p>Heavy-duty supports, pipeline frameworks, and high-tolerance platforms built for extreme environments.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 reveal reveal-d2">
+          <div class="industry-card">
+            <i class="bi bi-buildings-fill"></i>
+            <h4>Commercial Construction</h4>
+            <p>Structural steel framing, architectural metalwork, and load-bearing columns for skyscrapers.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 reveal reveal-d3">
+          <div class="industry-card">
+            <i class="bi bi-truck-front-fill"></i>
+            <h4>Logistics & Warehousing</h4>
+            <p>Large-span warehouse roofing, industrial racking systems, and protective crash barriers.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 reveal reveal-d4">
+          <div class="industry-card">
+            <i class="bi bi-water"></i>
+            <h4>Maritime Infrastructure</h4>
+            <p>Electro-galvanized components and corrosion-resistant steel for ports, docks, and coastal projects.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" id="why-us">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">Built On <span class="accent-text">Excellence</span></h2>
+        <p class="section-sub">What separates Heros Metallic from the rest.</p>
+      </div>
+      <div class="glass-card-grid">
+        <div class="glass-card-premium reveal reveal-d1">
+          <div class="icon"><i class="bi bi-tools"></i></div>
+          <h4>Precision Engineering</h4>
+          <p>Micron-level accuracy in every cut, weld, and assembly. Our CNC equipment delivers repeatable perfection.
+          </p>
+        </div>
+        <div class="glass-card-premium reveal reveal-d2">
+          <div class="icon"><i class="bi bi-lightbulb-fill"></i></div>
+          <h4>Innovation Focus</h4>
+          <p>Advanced 3D modeling, digital twins, and automated workflows keep us at the forefront of fabrication.</p>
+        </div>
+        <div class="glass-card-premium reveal reveal-d3">
+          <div class="icon"><i class="bi bi-patch-check-fill"></i></div>
+          <h4>Certified Quality</h4>
+          <p>ISO 9001:2015 certified. Every project undergoes rigorous testing and quality assurance protocols.</p>
+        </div>
+        <div class="glass-card-premium reveal reveal-d1">
+          <div class="icon"><i class="bi bi-clock-history"></i></div>
+          <h4>Unmatched Reliability</h4>
+          <p>98% on-time delivery rate. We honor our commitments with meticulous planning and fast execution.</p>
+        </div>
+        <div class="glass-card-premium reveal reveal-d2">
+          <div class="icon"><i class="bi bi-shield-check"></i></div>
+          <h4>Safety First</h4>
+          <p>Zero-compromise safety culture. Every process is designed around the well-being of our team and clients.
+          </p>
+        </div>
+        <div class="glass-card-premium reveal reveal-d3">
+          <div class="icon"><i class="bi bi-globe-americas"></i></div>
+          <h4>Global Delivery</h4>
+          <p>International logistics capability. We deliver massive fabricated structures to project sites worldwide.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="marquee-section" id="feedback">
+    <div class="container mb-5">
+      <div class="text-center reveal">
+        <h2 class="section-title">Trusted By <span class="accent-text">Leaders</span></h2>
+        <p class="section-sub">What our industrial partners are saying about our work.</p>
+      </div>
+    </div>
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Heros Metallic delivered exceptional quality on our largest structural project to
+            date. Their precision set a new benchmark."</p>
+          <div class="feedback-author">- Ahmed Al-Khatib, Al-Jaber Group</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"The precision on their CNC machining exceeded our highly stringent quality control
+            requirements."</p>
+          <div class="feedback-author">- TechFab Industries</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"An absolutely outstanding partner for heavy-duty industrial projects across the UAE
+            region."</p>
+          <div class="feedback-author">- Gulf Construct LLC</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Their custom steel furniture completely transformed the aesthetic of our commercial
+            showroom."</p>
+          <div class="feedback-author">- Urban Spaces Design</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Flawless execution on the powder coating. It provided an extremely durable and sleek
+            finish."</p>
+          <div class="feedback-author">- Prime Logistics UAE</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"The camera poles they fabricated for us withstand severe vibration and high wind
+            loads perfectly."</p>
+          <div class="feedback-author">- Secure-Tech Security</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Top-tier barrier solutions. They blended site security and physical durability
+            seamlessly."</p>
+          <div class="feedback-author">- Dubai Port Authority</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"A highly professional team offering transparent quoting and exceptional on-site
+            delivery times."</p>
+          <div class="feedback-author">- Nexus Builders</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"We rely entirely on Heros Metallic for all our specialized architectural metalwork
+            needs."</p>
+          <div class="feedback-author">- Studio MN Architects</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"The electro-galvanizing process they utilized has proven highly resilient in harsh
+            marine environments."</p>
+          <div class="feedback-author">- Coastal Marina Dev</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Incredible attention to detail in their handrail fabrication. Both safe and visually
+            stunning."</p>
+          <div class="feedback-author">- Oasis Hotels Group</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Consistency in quality and ability to handle complex engineering challenges makes
+            them our go-to fabrication partner."</p>
+          <div class="feedback-author">- Sarah Reynolds, Red Sea Eng.</div>
+        </div>
+
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Heros Metallic delivered exceptional quality on our largest structural project to
+            date. Their precision set a new benchmark."</p>
+          <div class="feedback-author">- Ahmed Al-Khatib, Al-Jaber Group</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"The precision on their CNC machining exceeded our highly stringent quality control
+            requirements."</p>
+          <div class="feedback-author">- TechFab Industries</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"An absolutely outstanding partner for heavy-duty industrial projects across the UAE
+            region."</p>
+          <div class="feedback-author">- Gulf Construct LLC</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Their custom steel furniture completely transformed the aesthetic of our commercial
+            showroom."</p>
+          <div class="feedback-author">- Urban Spaces Design</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Flawless execution on the powder coating. It provided an extremely durable and sleek
+            finish."</p>
+          <div class="feedback-author">- Prime Logistics UAE</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"The camera poles they fabricated for us withstand severe vibration and high wind
+            loads perfectly."</p>
+          <div class="feedback-author">- Secure-Tech Security</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Top-tier barrier solutions. They blended site security and physical durability
+            seamlessly."</p>
+          <div class="feedback-author">- Dubai Port Authority</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"A highly professional team offering transparent quoting and exceptional on-site
+            delivery times."</p>
+          <div class="feedback-author">- Nexus Builders</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"We rely entirely on Heros Metallic for all our specialized architectural metalwork
+            needs."</p>
+          <div class="feedback-author">- Studio MN Architects</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"The electro-galvanizing process they utilized has proven highly resilient in harsh
+            marine environments."</p>
+          <div class="feedback-author">- Coastal Marina Dev</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Incredible attention to detail in their handrail fabrication. Both safe and visually
+            stunning."</p>
+          <div class="feedback-author">- Oasis Hotels Group</div>
+        </div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <p class="feedback-text">"Consistency in quality and ability to handle complex engineering challenges makes
+            them our go-to fabrication partner."</p>
+          <div class="feedback-author">- Sarah Reynolds, Red Sea Eng.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage stage-contact py-5" id="contact">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <h2 class="section-title">Start Your <span class="accent-text">Project</span></h2>
+        <p class="section-sub">Connect with our engineers for a technical quotation.</p>
+      </div>
+
+      <div class="row align-items-stretch g-4">
+        <div class="col-lg-6">
+          <div class="reveal reveal-d1" style="height: 100%;">
+            <div class="map-container">
+              <iframe src="https://maps.google.com/maps?q=Dubai%20Industrial%20City&t=&z=12&ie=UTF8&iwloc=&output=embed"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="contact-form-panel reveal reveal-d2">
+            <form id="contactForm">
+              <div class="mb-4">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" placeholder="Enter your full name" required />
+              </div>
+              <div class="mb-4">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" placeholder="corporate@company.com" required />
+              </div>
+              <div class="mb-4">
+                <label class="form-label">Project Category</label>
+                <select class="form-control">
+                  <option value="" disabled selected>Select service type</option>
+                  <option>Steel Fabrication</option>
+                  <option>Industrial Welding</option>
+                  <option>CNC Cutting & Machining</option>
+                  <option>Structural Framework</option>
+                  <option>Interior/Architectural Metal</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <label class="form-label">Technical Details</label>
+                <textarea class="form-control" rows="5"
+                  placeholder="Briefly describe site conditions, load requirements, or dimensions..."
+                  required></textarea>
+              </div>
+              <button type="submit" class="btn-submit">
+                Submit RFQ <i class="bi bi-arrow-right"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer mt-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-logo">HEROS<span>.</span></div>
+          <p class="mt-3" style="max-width:320px">
+            Precision metal fabrication and industrial solutions built for ambitious projects.
+            Engineering excellence since 1998.
+          </p>
+          <div class="social">
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+            <a href="#"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6>Quick Links</h6>
+          <div class="mt-3"><a href="#home">Home</a></div>
+          <div class="mt-2"><a href="#about">About</a></div>
+          <div class="mt-2"><a href="#projects">Portfolio</a></div>
+          <div class="mt-2"><a href="#contact">Contact</a></div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6>Core Services</h6>
+          <div class="mt-3"><a href="#">Steel Fabrication</a></div>
+          <div class="mt-2"><a href="#">Industrial Welding</a></div>
+          <div class="mt-2"><a href="#">CNC Machining</a></div>
+          <div class="mt-2"><a href="#">Structural Engineering</a></div>
+        </div>
+        <div class="col-lg-4">
+          <h6>Contact Data</h6>
+          <p class="mt-3 mb-2"><i class="bi bi-geo-alt me-2 accent-text"></i> Dubai Industrial City, UAE</p>
+          <p class="mb-2"><i class="bi bi-telephone me-2 accent-text"></i> +971 4 123 4567</p>
+          <p><i class="bi bi-envelope me-2 accent-text"></i> info@herosmetallic.ae</p>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between">
+        <span>© 2026 Heros Metallic Supplies LLC. All rights reserved.</span>
+        <div class="d-flex gap-3">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      // ===== LOADER =====
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          document.getElementById('loader').classList.add('hidden');
+        }, 800);
+      });
+
+      // ===== FLOATING NAV SCROLL =====
+      var nav = document.getElementById('mainNav');
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      });
+
+      // ===== PARTICLES (Electric Blue Falling Sparks) =====
+      (function () {
+        var canvas = document.getElementById('particles-canvas');
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+
+        function resize() {
+          // Bind the canvas size specifically to the hero section instead of window
+          var hero = document.getElementById('home');
+          canvas.width = hero.offsetWidth;
+          canvas.height = hero.offsetHeight;
+        }
+
+        // Initial setup
+        window.addEventListener('load', resize);
+        window.addEventListener('resize', resize);
+
+        var count = Math.min(80, Math.floor(window.innerWidth * 0.05));
+        for (var i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: Math.random() * 1.5 + 0.5,
+            r: Math.random() * 2.5 + 0.5,
+            a: Math.random() * 0.5 + 0.1
+          });
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+
+            p.x += Math.sin(Date.now() / 1000 + i) * 0.5 + p.vx;
+            p.y += p.vy;
+
+            if (p.y > canvas.height) {
+              p.y = -10;
+              p.x = Math.random() * canvas.width;
+            }
+            if (p.x > canvas.width) p.x = 0;
+            if (p.x < 0) p.x = canvas.width;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            // Updated to Electric Blue
+            ctx.fillStyle = 'rgba(0, 194, 255,' + p.a + ')';
+            ctx.fill();
+          }
+          requestAnimationFrame(animate);
+        }
+
+        // Ensure canvas loads with correct dimensions before starting animation
+        setTimeout(animate, 100);
+      })();
+
+      // ===== SCROLL REVEAL =====
+      function handleReveal() {
+        var reveals = document.querySelectorAll('.reveal');
+        var wh = window.innerHeight;
+        reveals.forEach(function (el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < wh - 60) el.classList.add('active');
+        });
+      }
+      window.addEventListener('scroll', handleReveal);
+      window.addEventListener('load', function () { setTimeout(handleReveal, 200); });
+
+      // ===== COUNTERS =====
+      var countersAnimated = false;
+      function animateCounters() {
+        if (countersAnimated) return;
+        var impactSec = document.querySelector('.stage-impact');
+        if (!impactSec) return;
+        var rect = impactSec.getBoundingClientRect();
+        if (rect.top > window.innerHeight - 100) return;
+        countersAnimated = true;
+
+        var counters = document.querySelectorAll('.counter');
+        counters.forEach(function (c) {
+          var target = parseInt(c.getAttribute('data-target'), 10);
+          var duration = 2200;
+          var startTime = null;
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var p = Math.min((ts - startTime) / duration, 1);
+            var e = 1 - Math.pow(1 - p, 3);
+            c.textContent = Math.floor(e * target);
+            if (p < 1) requestAnimationFrame(step);
+            else c.textContent = target;
+          }
+          requestAnimationFrame(step);
+        });
+      }
+      window.addEventListener('scroll', animateCounters);
+      window.addEventListener('load', animateCounters);
+
+      // ===== CONTACT FORM =====
+      var contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var btn = this.querySelector('.btn-submit');
+          btn.innerHTML = 'Sending... <i class="bi bi-hourglass-split"></i>';
+          btn.disabled = true;
+          setTimeout(function () {
+            btn.innerHTML = 'Message Sent! <i class="bi bi-check-lg"></i>';
+            setTimeout(function () {
+              btn.innerHTML = 'Submit RFQ <i class="bi bi-arrow-right"></i>';
+              btn.disabled = false;
+            }, 2500);
+          }, 1500);
+        });
+      }
+
+      // ===== SMOOTH SCROLL =====
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = this.getAttribute('href');
+          if (id === '#') return;
+          var target = document.querySelector(id);
+          if (target) {
+            e.preventDefault();
+            var navHeight = 80;
+            var elementPosition = target.getBoundingClientRect().top;
+            var offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+
+            var navMenu = document.getElementById('navMenu');
+            if (navMenu && navMenu.classList.contains('show')) {
+              var bs = bootstrap.Collapse.getInstance(navMenu);
+              if (bs) bs.hide();
+            }
+          }
+        });
+      });
+
+    })();
+  </script>
+</body>
+
+</html>
