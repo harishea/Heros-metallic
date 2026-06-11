@@ -8,9 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zain:wght@300;400;700;800;900&display=swap" rel="stylesheet">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
@@ -52,7 +50,8 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Poppins', sans-serif;
+      /* Secondary Font */
+      font-family: 'Averta', sans-serif;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -69,16 +68,16 @@
     .navbar-brand,
     .impact-num,
     .project-card .name {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      letter-spacing: -0.03em;
+      /* Primary Font */
+      font-family: 'Zain', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
       color: var(--text);
     }
 
+    /* text-stroke removed, normal text with the primary color */
     .text-outline {
-      color: transparent !important;
-      -webkit-text-fill-color: transparent !important;
-      -webkit-text-stroke: 2px var(--text);
+      color: var(--accent) !important;
     }
 
     .btn-accent,
@@ -90,7 +89,8 @@
     .footer h6,
     .view-btn,
     .nav-link {
-      font-family: 'Poppins', sans-serif;
+      /* Secondary Font */
+      font-family: 'Averta', sans-serif;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
@@ -155,23 +155,12 @@
     }
 
     .loader-text {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Averta', sans-serif;
       font-size: 0.65rem;
       letter-spacing: 6px;
       text-transform: uppercase;
       color: var(--text-dim);
       font-weight: 600;
-    }
-
-    /* === PARTICLES CANVAS (WHOLE PAGE) === */
-    #particles-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 9999;
-      pointer-events: none;
     }
 
     /* === FLOATING NAVBAR === */
@@ -300,7 +289,6 @@
       }
     }
 
-
     /* The Image Background Inside the Frame (Less Opacity) */
     .hero-bg-image {
       position: absolute;
@@ -396,7 +384,7 @@
        ABOUT
     ======================================== */
     .about-badge {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Zain', sans-serif;
       font-weight: 800;
       letter-spacing: 1px;
       color: var(--text);
@@ -406,7 +394,7 @@
       color: var(--accent);
       font-size: 0.85rem;
       text-transform: uppercase;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Averta', sans-serif;
       letter-spacing: 2px;
       font-weight: 600;
     }
@@ -529,7 +517,7 @@
     }
 
     .industry-card h4 {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Zain', sans-serif;
       font-size: 1.3rem;
       margin-bottom: 10px;
       text-transform: capitalize;
@@ -583,7 +571,7 @@
     }
 
     .glass-card-premium h4 {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Zain', sans-serif;
       font-size: 1.3rem;
       margin-bottom: 12px;
       text-transform: capitalize;
@@ -712,7 +700,7 @@
     }
 
     .feedback-author {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Averta', sans-serif;
       font-weight: 700;
       font-size: 0.85rem;
       color: var(--text);
@@ -812,7 +800,7 @@
     }
 
     .footer-logo {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Zain', sans-serif;
       font-size: 2rem;
       font-weight: 900;
       color: var(--text);
@@ -836,7 +824,7 @@
     .footer a {
       color: var(--text-dim);
       text-decoration: none;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Averta', sans-serif;
       font-size: 0.85rem;
       transition: color 0.3s;
     }
@@ -965,8 +953,6 @@
 
 <body>
 
-  <canvas id="particles-canvas"></canvas>
-
   <div class="loader" id="loader">
     <div class="loader-ring"></div>
     <div class="loader-text">Forging Excellence</div>
@@ -1089,7 +1075,7 @@
       </div>
       <div class="project-grid">
         <div class="project-card reveal reveal-d1">
-          <img src="images/s.webp" alt="Bridge" loading="lazy" />
+          <img src="images/f1.png" alt="Bridge" loading="lazy" />
           <div class="overlay">
             <span class="tag">Structural Steel</span>
             <div class="name">Structural Fabrication</div>
@@ -1097,7 +1083,7 @@
           </div>
         </div>
         <div class="project-card reveal reveal-d2">
-          <img src="images/s2.webp" alt="Warehouse" loading="lazy" />
+          <img src="images/f2.jpg" alt="Warehouse" loading="lazy" />
           <div class="overlay">
             <span class="tag">Logistics</span>
             <div class="name">Handrail Works</div>
@@ -1105,7 +1091,7 @@
           </div>
         </div>
         <div class="project-card reveal reveal-d3">
-          <img src="images/s3.webp" alt="Tower" loading="lazy" />
+          <img src="images/f3.jpg" alt="Tower" loading="lazy" />
           <div class="overlay">
             <span class="tag">Commercial</span>
             <div class="name">Heros Metallic Supplies</div>
@@ -1113,7 +1099,7 @@
           </div>
         </div>
         <div class="project-card reveal reveal-d1">
-          <img src="images/s4.webp" alt="Atrium" loading="lazy" />
+          <img src="images/f4.webp" alt="Atrium" loading="lazy" />
           <div class="overlay">
             <span class="tag">Architectural</span>
             <div class="name">Interior Decorators</div>
@@ -1121,7 +1107,7 @@
           </div>
         </div>
         <div class="project-card reveal reveal-d2">
-          <img src="images/s5.webp" alt="Pipeline" loading="lazy" />
+          <img src="images/f5.jpeg" alt="Pipeline" loading="lazy" />
           <div class="overlay">
             <span class="tag">Oil & Gas</span>
             <div class="name">Interior Decorators Pergola Works</div>
@@ -1129,7 +1115,7 @@
           </div>
         </div>
         <div class="project-card reveal reveal-d3">
-          <img src="images/s6.webp" alt="Stadium" loading="lazy" />
+          <img src="images/f6.jpg" alt="Stadium" loading="lazy" />
           <div class="overlay">
             <span class="tag">Sports</span>
             <div class="name">Metal Fabrication</div>
@@ -1511,59 +1497,6 @@
           nav.classList.remove('scrolled');
         }
       });
-
-      // ===== PARTICLES (Electric Blue Falling Sparks - WHOLE PAGE) =====
-      (function () {
-        var canvas = document.getElementById('particles-canvas');
-        var ctx = canvas.getContext('2d');
-        var particles = [];
-
-        function resize() {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-        }
-
-        window.addEventListener('load', resize);
-        window.addEventListener('resize', resize);
-
-        var count = Math.min(80, Math.floor(window.innerWidth * 0.05));
-        for (var i = 0; i < count; i++) {
-          particles.push({
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: Math.random() * 1.5 + 0.5,
-            r: Math.random() * 2.5 + 0.5,
-            a: Math.random() * 0.5 + 0.1
-          });
-        }
-
-        function animate() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          for (var i = 0; i < particles.length; i++) {
-            var p = particles[i];
-
-            p.x += Math.sin(Date.now() / 1000 + i) * 0.5 + p.vx;
-            p.y += p.vy;
-
-            if (p.y > canvas.height) {
-              p.y = -10;
-              p.x = Math.random() * canvas.width;
-            }
-            if (p.x > canvas.width) p.x = 0;
-            if (p.x < 0) p.x = canvas.width;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            // Electric Blue Particles
-            ctx.fillStyle = 'rgba(2, 132, 199,' + p.a + ')';
-            ctx.fill();
-          }
-          requestAnimationFrame(animate);
-        }
-
-        setTimeout(animate, 100);
-      })();
 
       // ===== SCROLL REVEAL =====
       function handleReveal() {
